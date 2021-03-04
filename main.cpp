@@ -2,6 +2,7 @@
 #include <string>
 #include <cstdlib>
 #include <vector>
+//#include <format>
 
 struct Color {
     double r;
@@ -212,35 +213,32 @@ main() -> int
     std::cout.setf(std::ios::fixed);
     std::cout << "vec4 gen(float value) {\n";
 
-    std::cout << "float left[" << segments.size() << "] = float[](\n";
-    printJoined(std::cout, segments.left, ",");
-    std::cout << "\n);\n";
+    auto const printData = [](
+            auto const& data,
+            std::string const& name,
+            std::string const& type) {
+        std::cout << type << " " << name << "[" << data.size() << "]"
+            << " = " << type << "[" << data.size() << "](\n";
+        /*std::format(
+            "{} left[{}] = {}[{}](\n",
+            type,
+            segments.size(),
+            type,
+            segments.size());
+        */
+        printJoined(std::cout, data, ",");
+        std::cout << "\n);\n";
+    };
 
-    std::cout << "float middle[" << segments.size() << "] = float[](\n";
-    printJoined(std::cout, segments.middle, ",");
-    std::cout << "\n);\n";
+    printData(segments.left, "left", "float");
+    printData(segments.middle, "middle", "float");
+    printData(segments.right, "right", "float");
+    printData(segments.leftColor, "leftColor", "vec4");
+    printData(segments.rightColor, "rightColor", "vec4");
+    printData(segments.blendType, "blendType", "int");
+    printData(segments.colorType, "colorType", "int");
 
-    std::cout << "float right[" << segments.size() << "] = float[](\n";
-    printJoined(std::cout, segments.right, ",");
-    std::cout << "\n);\n";
-
-    std::cout << "vec4 leftColor[" << segments.size() << "] = vec4[](\n";
-    printJoined(std::cout, segments.leftColor, ",");
-    std::cout << "\n);\n";
-
-    std::cout << "vec4 rightColor[" << segments.size() << "] = vec4[](\n";
-    printJoined(std::cout, segments.rightColor, ",");
-    std::cout << "\n);\n";
-
-    std::cout << "int blendType[" << segments.size() << "] = int[](\n";
-    printJoined(std::cout, segments.blendType, ",");
-    std::cout << "\n);\n";
-
-    std::cout << "int colorType[" << segments.size() << "] = int[](\n";
-    printJoined(std::cout, segments.colorType, ",");
-    std::cout << "\n);\n";
-
-    std::cout << "int first = 0;\n int last = " << segments.size()-1 << ";\n";
+    std::cout << "int first = 0;\nint last = " << segments.size()-1 << ";\n";
 
     std::cout << R"(while(first != last) {
     int i = (first+last) / 2;
