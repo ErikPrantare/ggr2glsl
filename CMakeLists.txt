@@ -7,3 +7,7 @@ add_executable(ggr2glsl
     src/main.cpp
     src/color.cpp
     src/segment.cpp)
+
+if(MINGW)
+    target_link_libraries(ggr2glsl PRIVATE -static)
+endif()

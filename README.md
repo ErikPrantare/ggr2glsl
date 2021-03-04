@@ -19,7 +19,7 @@ To use this function, simply pass it a floating point number and you will get
 the respective gradient color.
 
 ## Download (Windows)
-tba
+https://github.com/ErikPrantare/ggr2glsl/releases/tag/v0.0.0
 
 ## Build (Linux)
 ```sh
