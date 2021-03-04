@@ -2,7 +2,7 @@
 
 This is a simple utility to convert GIMP gradient files to GLSL functions.
 
-# Usage
+## Usage
 
 ggr2glsl reads from standard input and writes to standard output.
 Say that you want to convert a gradient called purples.ggr
@@ -18,10 +18,10 @@ The file myGradient.glsl now contains, among some other functions,
 To use this function, simply pass it a floating point number and you will get
 the respective gradient color.
 
-# Download (Windows)
+## Download (Windows)
 tba
 
-# Build (Linux)
+## Build (Linux)
 ```sh
 cmake -Bbuild
 cmake --build build
