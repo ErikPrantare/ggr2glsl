@@ -154,7 +154,9 @@ R"(
     switch(colorType[index]) {
     //rgb
     case 0: {
-        return mix(leftColor[index], rightColor[index], factor);
+        vec4 lGammaCorrected = pow(leftColor[index], vec4(1.0/2.2));
+        vec4 rGammaCorrected = pow(rightColor[index], vec4(1.0/2.2));
+        return pow(mix(lGammaCorrected, rGammaCorrected, factor), vec4(2.2));
     }   break;
 
     //hsv ccw
