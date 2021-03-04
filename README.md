@@ -24,7 +24,7 @@ https://github.com/ErikPrantare/ggr2glsl/releases/tag/v0.0.0
 
 ## Build (Linux)
 ```sh
-cmake -Bbuild
+cmake . -Bbuild
 cmake --build build
 mv build/ggr2glsl .
 ```
