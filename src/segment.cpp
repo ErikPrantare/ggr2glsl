@@ -1,5 +1,7 @@
 #include "segment.hpp"
 
+#include <sstream>
+
 auto
 Segments::add(Segment const& segment) -> void {
     left.push_back(segment.left);
@@ -97,7 +99,12 @@ parseSegments(std::istream& in) -> Segments
     auto segments = std::vector<Segment>(numSegments);
 
     for(auto& segment : segments) {
-        if(!(in >> segment)) {
+        // Newer gradiens may contain additional data per segment,
+        // reading whole line allows us to ignore these.
+        std::getline(in, line);
+        auto ss = std::stringstream(line);
+
+        if(!(ss >> segment)) {
             std::cerr
                 << "Error on line " << currentLine << ": "
                 << "Wrong format or wrong number of segments" << std::endl;
