@@ -1,0 +1,8 @@
+# Gradient files
+*.ggr
+
+# GLSL files
+*.glsl
+
+# Build files
+build
