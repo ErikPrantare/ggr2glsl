@@ -6,11 +6,11 @@
 #include "color.hpp"
 #include "segment.hpp"
 
-template<typename OutputIterator>
+template<typename InputIterator>
 auto
 printJoined(
-        OutputIterator begin,
-        OutputIterator const end,
+        InputIterator begin,
+        InputIterator const end,
         std::ostream& out,
         std::string const& delim)
     -> void
