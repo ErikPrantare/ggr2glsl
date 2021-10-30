@@ -1,0 +1,13 @@
+Changelog:
+
+Added features are marked with a '+',
+removed features with a '-',
+and changed/other with a '.'.
+
+This project adheres to semantic versioning (MAJOR.MINOR.PATCH).
+
+CURRENT: 
+. Fix hsv interpolation bug
+
+0.0.0 (2021-03-05):
+. Initial release

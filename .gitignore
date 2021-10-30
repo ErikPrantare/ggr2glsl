@@ -6,3 +6,9 @@
 
 # Build files
 build
+
+# lsp
+compile_commands.json
+
+# CMake
+.cache/
