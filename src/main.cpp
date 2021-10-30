@@ -12,8 +12,7 @@ printJoined(
         InputIterator begin,
         InputIterator const end,
         std::ostream& out,
-        std::string const& delim)
-    -> void
+        std::string const& delim) -> void
 {
     if(begin == end) {
         return;
@@ -59,10 +58,12 @@ vec4 ggr2glsl_rgb2hsv(vec4 c)
 }
 
 auto
-main() -> int
+main(int argc, char* argv[]) -> int
 {
+    auto const args = std::vector(argv, argv + argc);
+
     Segments const segments = parseSegments(std::cin);
-    
+
     std::cout.precision(5);
     std::cout.setf(std::ios::fixed);
     printFunctions(std::cout);
@@ -70,13 +71,11 @@ main() -> int
     std::cout << "vec4 ggr2glsl_color(float value) {\n";
     std::cout << "    value = clamp(value, 0.0, 1.0);\n\n";
 
-    auto const printData = [](
-            auto const& data,
-            std::string const& name,
-            std::string const& type) {
-        std::cout << "    const " << type << " " << name
-            << "[" << data.size() << "] = " << 
-            type << "[" << data.size() << "](\n";
+    auto const printData = [](auto const& data,
+                              std::string const& name,
+                              std::string const& type) {
+        std::cout << "    const " << type << " " << name << "[" << data.size()
+                  << "] = " << type << "[" << data.size() << "](\n";
 
         std::cout << "        ";
         printJoined(data.begin(), data.end(), std::cout, ",\n        ");
@@ -92,12 +91,11 @@ main() -> int
     printData(segments.blendType, "blendType", "int");
     printData(segments.colorType, "colorType", "int");
 
-    std::cout
-        << "    int first = 0;\n"
-        << "    int last = " << segments.size()-1 << ";\n";
+    std::cout << "    int first = 0;\n"
+              << "    int last = " << segments.size() - 1 << ";\n";
 
     std::cout <<
-R"(
+            R"(
     while(first != last) {
         int i = (first+last) / 2;
         if(value <= right[i]) {
@@ -178,7 +176,7 @@ R"(
             res.x -= 1.0;
         }
 
-        return ggr2glsl_hsv2rgb(mix(leftHsv, rightHsv, factor));
+        return ggr2glsl_hsv2rgb(res);
     }   break;
 
     //hsv cw
@@ -200,12 +198,11 @@ R"(
             res.x += 1.0;
         }
 
-        return ggr2glsl_hsv2rgb(mix(leftHsv, rightHsv, factor));
+        return ggr2glsl_hsv2rgb(res);
     }   break;
     
     }
 )";
-
 
     // Closing function bracket
     std::cout << "}\n";
